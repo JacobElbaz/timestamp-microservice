@@ -26,9 +26,10 @@ app.get("/api/hello", function (req, res) {
 app.get('/api/:date', (req, res) => {
   const date = req.params.date;
   if(date.includes("-")){
-    res.json({unix: new Date(date).getTime(), utc: new Date(date).toUTCString()});
+    const unix = new Date(date).getTime();
+    res.json({unix: parseInt(unix), utc: new Date(date).toUTCString()});
   }
-  else res.json({ unix: date, utc: new Date(parseInt(date)).toUTCString() });
+  else res.json({ unix: parseInt(date), utc: new Date(parseInt(date)).toUTCString() });
 })
 
 // Listen on port set in environment variable or default to 3000
